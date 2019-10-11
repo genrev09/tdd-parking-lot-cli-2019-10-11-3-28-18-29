@@ -60,4 +60,18 @@ class ParkingBoyFacts {
         assertNull(parkingLot.getCar(wrongTicket));
         assertNull(parkingLot.getCar(null));
     }
+
+    @Test
+    void should_not_fetch_car_using_used_ticket() {
+
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        Car car = new Car();
+
+        ParkingTicket parkingTicket = parkingBoy.park(car);
+        Car fetchedCar = parkingBoy.fetch(parkingTicket);
+        Car car2 = parkingBoy.fetch(parkingTicket);
+
+        assertNull(car2);
+    }
 }
