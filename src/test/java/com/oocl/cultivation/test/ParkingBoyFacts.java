@@ -74,4 +74,16 @@ class ParkingBoyFacts {
 
         assertNull(car2);
     }
+
+    @Test
+    void should_not_park_when_parking_lot_is_full() {
+        Car ExceedingCar = new Car();
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        for (int park_times = 0; park_times < parkingLot.getCapacity(); park_times++){
+            parkingBoy.park(new Car());
+        }
+        ParkingTicket ticket = parkingBoy.park(ExceedingCar);
+        assertNull(ticket);
+    }
 }

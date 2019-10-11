@@ -10,7 +10,10 @@ public class ParkingBoy {
     }
 
     public ParkingTicket park(Car car) {
-        return parkingLot.addCar(car);
+        if (parkingLot.getAvailableParkingPosition() != 0)
+            return parkingLot.addCar(car);
+        else
+            return null;
     }
 
     public Car fetch(ParkingTicket ticket) {
