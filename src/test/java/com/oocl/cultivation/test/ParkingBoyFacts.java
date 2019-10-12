@@ -165,6 +165,20 @@ class ParkingBoyFacts {
         assertEquals(1,parkingLot1.countCars());
         assertEquals(1,parkingLot2.countCars());
     }
+
+    @Test
+    void should_park_car_to_parking_lot_with_larger_available_position_rate__using_super_smart_parking_boy() {
+        ParkingLot parkingLot1 = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot();
+        SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLot1);
+        superSmartParkingBoy.addParkingLot(parkingLot2);
+
+        superSmartParkingBoy.park(new Car());
+        superSmartParkingBoy.park(new Car());
+
+        assertEquals(1,parkingLot1.countCars());
+        assertEquals(1,parkingLot2.countCars());
+    }
     private String systemOut() {
         return outContent.toString();
     }
