@@ -13,7 +13,7 @@ public class ParkingBoy {
         if (parkingLot.getAvailableParkingPosition() != 0)
             return parkingLot.addCar(car);
         else {
-            System.out.print("Not enough position.");
+            lastErrorMessage = "Not enough position.";
             return null;
         }
     }
@@ -21,9 +21,9 @@ public class ParkingBoy {
     public Car fetch(ParkingTicket ticket) {
         Car car = parkingLot.getCar(ticket);
         if (ticket == null)
-            System.out.print("Please provide your parking ticket.");
+            lastErrorMessage = "Please provide your parking ticket.";
         else if (car == null)
-            System.out.print("Unrecognized parking ticket.");
+            lastErrorMessage = "Unrecognized parking ticket.";
         return car;
     }
 

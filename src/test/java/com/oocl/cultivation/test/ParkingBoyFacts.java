@@ -104,23 +104,21 @@ class ParkingBoyFacts {
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
         Car originalCar = new Car();
         ParkingTicket ticket = parkingBoy.park(originalCar);
-        Car fetchedCar = parkingBoy.fetch(ticket);
 
-        Car nullCar = parkingBoy.fetch(ticket);
-        String actualResponseMessage = systemOut();
+        parkingBoy.fetch(ticket);
+        parkingBoy.fetch(ticket);
 
-        assertEquals("Unrecognized parking ticket.",actualResponseMessage);
+        assertEquals("Unrecognized parking ticket.",parkingBoy.getLastErrorMessage());
     }
 
     @Test
     void should_message_please_provide_your_parking_ticket_when_ticket_is_null() {
         ParkingLot parkingLot = new ParkingLot();
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
-        Car nullCar = parkingBoy.fetch(null);
 
-        String actualResponseMessage = systemOut();
+        parkingBoy.fetch(null);
 
-        assertEquals("Please provide your parking ticket.",actualResponseMessage);
+        assertEquals("Please provide your parking ticket.",parkingBoy.getLastErrorMessage());
     }
 
     @Test
@@ -135,11 +133,10 @@ class ParkingBoyFacts {
         }
 
         parkingBoy.park(car);
-        String actualResponseMessage = systemOut();
 
-        assertEquals("Not enough position.", actualResponseMessage);
+        assertEquals("Not enough position.", parkingBoy.getLastErrorMessage());
     }
-
+    
     private String systemOut() {
         return outContent.toString();
     }
