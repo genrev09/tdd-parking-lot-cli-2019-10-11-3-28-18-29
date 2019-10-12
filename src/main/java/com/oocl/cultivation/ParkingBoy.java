@@ -20,6 +20,8 @@ public class ParkingBoy {
         Car car = parkingLot.getCar(ticket);
         if (ticket == null)
             System.out.print("Unrecognized parking ticket");
+        else if (car == null)
+            System.out.print("Unrecognized parking ticket");
         return car;
     }
 
