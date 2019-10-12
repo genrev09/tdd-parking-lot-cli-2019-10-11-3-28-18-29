@@ -4,11 +4,22 @@ import com.oocl.cultivation.Car;
 import com.oocl.cultivation.ParkingBoy;
 import com.oocl.cultivation.ParkingLot;
 import com.oocl.cultivation.ParkingTicket;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ParkingBoyFacts {
+    private ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+
+    @BeforeEach
+    public void setup() {
+        System.setOut(new PrintStream(outContent));
+    }
+
     @Test
     void should_park_car_into_the_parking_lot_by_parking_boy() {
         ParkingLot parkingLot = new ParkingLot();
@@ -85,5 +96,20 @@ class ParkingBoyFacts {
         }
         ParkingTicket ticket = parkingBoy.park(ExceedingCar);
         assertNull(ticket);
+    }
+
+    @Test
+    void should_message_unrecognized_parking_ticket_when_ticket_is_null() {
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        Car nullCar = parkingBoy.fetch(null);
+
+        String actualResponseMessage = systemOut();
+
+        assertEquals("Unrecognized parking ticket",actualResponseMessage);
+    }
+
+    private String systemOut() {
+        return outContent.toString();
     }
 }
