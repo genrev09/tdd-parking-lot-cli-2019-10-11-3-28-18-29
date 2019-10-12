@@ -12,8 +12,10 @@ public class ParkingBoy {
     public ParkingTicket park(Car car) {
         if (parkingLot.getAvailableParkingPosition() != 0)
             return parkingLot.addCar(car);
-        else
+        else {
+            System.out.print("Not enough position.");
             return null;
+        }
     }
 
     public Car fetch(ParkingTicket ticket) {
