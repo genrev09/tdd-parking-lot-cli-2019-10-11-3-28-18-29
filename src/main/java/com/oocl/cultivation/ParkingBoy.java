@@ -23,7 +23,7 @@ public class ParkingBoy {
                     .filter(parkingLot -> parkingLot.countCars() != parkingLot.getCapacity())
                     .findFirst().orElse(null);
             if (availableParkingLot == null){
-                lastErrorMessage = "Not enough position.";
+                setLastErrorMessage("Not enough position.");
                 return null;
             } else {
                 return availableParkingLot.addCar(car);
@@ -34,9 +34,9 @@ public class ParkingBoy {
     public Car fetch(ParkingTicket ticket) {
         Car car = parkingLot.getCar(ticket);
         if (ticket == null)
-            lastErrorMessage = "Please provide your parking ticket.";
+            setLastErrorMessage("Please provide your parking ticket.");
         else if (car == null)
-            lastErrorMessage = "Unrecognized parking ticket.";
+            setLastErrorMessage("Unrecognized parking ticket.");
         return car;
     }
 
@@ -46,5 +46,9 @@ public class ParkingBoy {
 
     public List<ParkingLot> getParkingLotList() {
         return parkingLotList;
+    }
+
+    public void setLastErrorMessage(String lastErrorMessage) {
+        this.lastErrorMessage = lastErrorMessage;
     }
 }

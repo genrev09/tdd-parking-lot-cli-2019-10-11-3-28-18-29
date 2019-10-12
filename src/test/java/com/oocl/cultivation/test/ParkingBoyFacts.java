@@ -1,9 +1,6 @@
 package com.oocl.cultivation.test;
 
-import com.oocl.cultivation.Car;
-import com.oocl.cultivation.ParkingBoy;
-import com.oocl.cultivation.ParkingLot;
-import com.oocl.cultivation.ParkingTicket;
+import com.oocl.cultivation.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -156,6 +153,19 @@ class ParkingBoyFacts {
         parkingBoy.park(car);
 
         assertNull(parkingBoy.getLastErrorMessage());
+    }
+
+    @Test
+    void should_park_car_to_parking_lot_with_more_space_with_smart_parking_boy() {
+        ParkingLot parkingLot1 = new ParkingLot();
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLot1);
+        ParkingLot parkingLot2 = smartParkingBoy.getParkingLotList().get(1);
+
+        smartParkingBoy.park(new Car());
+        smartParkingBoy.park(new Car());
+
+        assertEquals(1,parkingLot1.countCars());
+        assertEquals(1,parkingLot2.countCars());
     }
     private String systemOut() {
         return outContent.toString();
