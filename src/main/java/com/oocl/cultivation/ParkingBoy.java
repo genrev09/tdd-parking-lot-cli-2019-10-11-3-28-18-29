@@ -7,12 +7,11 @@ public class ParkingBoy {
 
     private final ParkingLot parkingLot;
     private String lastErrorMessage;
-    private final List<ParkingLot> parkingLotList = new ArrayList<>();
+    private List<ParkingLot> parkingLotList = new ArrayList<>();
 
     public ParkingBoy(ParkingLot parkingLot) {
         this.parkingLot = parkingLot;
         parkingLotList.add(parkingLot);
-        parkingLotList.add(new ParkingLot());
     }
 
     public ParkingTicket park(Car car) {
@@ -50,5 +49,9 @@ public class ParkingBoy {
 
     public void setLastErrorMessage(String lastErrorMessage) {
         this.lastErrorMessage = lastErrorMessage;
+    }
+
+    public void addParkingLot(ParkingLot parkingLot){
+        parkingLotList.add(parkingLot);
     }
 }

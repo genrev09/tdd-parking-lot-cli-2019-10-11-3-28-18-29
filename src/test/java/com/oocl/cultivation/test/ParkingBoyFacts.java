@@ -88,10 +88,8 @@ class ParkingBoyFacts {
         Car ExceedingCar = new Car();
         ParkingLot parkingLot = new ParkingLot();
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
-        for (ParkingLot _parkingLot: parkingBoy.getParkingLotList()) {
-            for (int park_times = 0; park_times < _parkingLot.getCapacity(); park_times++){
-                parkingBoy.park(new Car());
-            }
+        for (int park_times = 0; park_times < parkingLot.getCapacity(); park_times++){
+            parkingBoy.park(new Car());
         }
 
         ParkingTicket ticket = parkingBoy.park(ExceedingCar);
@@ -128,10 +126,8 @@ class ParkingBoyFacts {
         Car car = new Car();
 
         //Fill Parking Lot
-        for (ParkingLot _parkingLot: parkingBoy.getParkingLotList()) {
-            for (int park_times = 0; park_times < _parkingLot.getCapacity(); park_times++){
-                parkingBoy.park(new Car());
-            }
+        for (int park_times = 0; park_times < parkingLot.getCapacity(); park_times++){
+            parkingBoy.park(new Car());
         }
 
         parkingBoy.park(car);
@@ -143,6 +139,7 @@ class ParkingBoyFacts {
     void should_park_car_to_another_parking_lot_when_parking_lot_1_is_full() {
         ParkingLot parkingLot = new ParkingLot();
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        parkingBoy.addParkingLot(new ParkingLot());
         Car car = new Car();
 
         //Fill Parking Lot
@@ -158,8 +155,9 @@ class ParkingBoyFacts {
     @Test
     void should_park_car_to_parking_lot_with_more_space_with_smart_parking_boy() {
         ParkingLot parkingLot1 = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot();
         SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLot1);
-        ParkingLot parkingLot2 = smartParkingBoy.getParkingLotList().get(1);
+        smartParkingBoy.addParkingLot(parkingLot2);
 
         smartParkingBoy.park(new Car());
         smartParkingBoy.park(new Car());
