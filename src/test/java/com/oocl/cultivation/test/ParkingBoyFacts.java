@@ -91,9 +91,12 @@ class ParkingBoyFacts {
         Car ExceedingCar = new Car();
         ParkingLot parkingLot = new ParkingLot();
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
-        for (int park_times = 0; park_times < parkingLot.getCapacity(); park_times++){
-            parkingBoy.park(new Car());
+        for (ParkingLot _parkingLot: parkingBoy.getParkingLotList()) {
+            for (int park_times = 0; park_times < _parkingLot.getCapacity(); park_times++){
+                parkingBoy.park(new Car());
+            }
         }
+
         ParkingTicket ticket = parkingBoy.park(ExceedingCar);
         assertNull(ticket);
     }
@@ -128,15 +131,32 @@ class ParkingBoyFacts {
         Car car = new Car();
 
         //Fill Parking Lot
-        for (int count = 0; count < parkingLot.getCapacity(); count ++){
-            parkingBoy.park(new Car());
+        for (ParkingLot _parkingLot: parkingBoy.getParkingLotList()) {
+            for (int park_times = 0; park_times < _parkingLot.getCapacity(); park_times++){
+                parkingBoy.park(new Car());
+            }
         }
 
         parkingBoy.park(car);
 
         assertEquals("Not enough position.", parkingBoy.getLastErrorMessage());
     }
-    
+
+    @Test
+    void should_park_car_to_another_parking_lot_when_parking_lot_1_is_full() {
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        Car car = new Car();
+
+        //Fill Parking Lot
+        for (int count = 0; count < parkingLot.getCapacity(); count ++){
+            parkingBoy.park(new Car());
+        }
+
+        parkingBoy.park(car);
+
+        assertNull(parkingBoy.getLastErrorMessage());
+    }
     private String systemOut() {
         return outContent.toString();
     }
